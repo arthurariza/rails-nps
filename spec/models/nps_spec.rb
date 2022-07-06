@@ -33,9 +33,11 @@ RSpec.describe Nps, type: :model do
   end
 
   describe '#filter' do
-    let(:realtor_feedbacks) { create_list(:nps, 10, touchpoint: 0) }
-    let(:realtor_supports) { create_list(:nps, 15, touchpoint: 1) }
-    let(:closed_deals) { create_list(:nps, 20, touchpoint: 2) }
+    before do
+      create_list(:nps, 10, touchpoint: 0)
+      create_list(:nps, 15, touchpoint: 1)
+      create_list(:nps, 20, touchpoint: 2)
+    end
 
     it 'should filter by touchpoint' do
       expect(Nps.filter(0).count).to eq 10

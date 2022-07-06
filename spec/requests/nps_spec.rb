@@ -13,8 +13,9 @@ RSpec.describe 'Nps', type: :request do
       expect(response).to have_http_status(:bad_request)
     end
 
-    let(:nps) { create_list(:nps, 10, touchpoint: 0) }
     it 'lists all filtered nps' do
+      create_list(:nps, 10, touchpoint: 0)
+
       get '/nps?touchpoint=0'
 
       parsed_body = JSON.parse(response.body)
@@ -24,6 +25,8 @@ RSpec.describe 'Nps', type: :request do
     end
 
     it 'returns nps attributes' do
+      create(:nps, touchpoint: 0)
+
       get '/nps?touchpoint=0'
 
       parsed_body = JSON.parse(response.body)
