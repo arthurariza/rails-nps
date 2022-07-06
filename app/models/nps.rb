@@ -13,4 +13,11 @@ class Nps < ApplicationRecord
     realtor_support: 1,
     closed_deal: 2
   }
+
+  def self.filter(touchpoint, respondent_class = nil, object_class = nil)
+    result = Nps.where('touchpoint = ?', touchpoint).includes(:object, :respondent)
+    result = result.where('respondent_class ILIKE ?', "%#{respondent_class}%") if respondent_class.present?
+    result = result.where('object_class ILIKE ?', "%#{object_class}%") if object_class.present?
+    result
+  end
 end
