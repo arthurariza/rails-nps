@@ -5,6 +5,8 @@ class User < ApplicationRecord
   validates :name, uniqueness: true
 
   has_many :properties
+  has_many :objects, class_name: 'Nps', foreign_key: 'object_id'
+  has_many :respondents, class_name: 'Nps', foreign_key: 'respondent_id'
 
   enum role: {
     seller: 0,

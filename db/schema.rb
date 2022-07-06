@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_06_021807) do
+ActiveRecord::Schema.define(version: 2022_07_06_031607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "nps", force: :cascade do |t|
+    t.integer "score"
+    t.integer "touchpoint"
+    t.string "respondent_class"
+    t.bigint "respondent_id", null: false
+    t.string "object_class"
+    t.bigint "object_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["object_id"], name: "index_nps_on_object_id"
+    t.index ["respondent_id"], name: "index_nps_on_respondent_id"
+  end
 
   create_table "properties", force: :cascade do |t|
     t.string "name"
@@ -31,5 +44,7 @@ ActiveRecord::Schema.define(version: 2022_07_06_021807) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "nps", "users", column: "object_id"
+  add_foreign_key "nps", "users", column: "respondent_id"
   add_foreign_key "properties", "users"
 end
