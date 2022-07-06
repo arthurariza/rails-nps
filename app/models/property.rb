@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-class User < ApplicationRecord
+class Property < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
 
-  has_many :properties
+  belongs_to :user
 
-  enum role: {
-    seller: 0,
-    realtor: 1
+  enum property_type: {
+    house: 0,
+    apartment: 1
   }
 end

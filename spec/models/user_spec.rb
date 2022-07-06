@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -9,5 +11,9 @@ RSpec.describe User, type: :model do
       should define_enum_for(:role)
         .with_values(seller: 0, realtor: 1)
     end
+  end
+
+  describe 'associations' do
+    it { should have_many(:properties) }
   end
 end
