@@ -14,7 +14,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many(:properties) }
     it { should have_many(:objects).class_name('Nps').with_foreign_key('object_id') }
     it { should have_many(:respondents).class_name('Nps').with_foreign_key('respondent_id') }
   end
