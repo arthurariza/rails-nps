@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   defaults format: :json do
     resources :nps, only: %i[index]
     get 'nps_survey/:token', to: 'nps_survey#index', as: 'nps_survey'
+    get 'mock', to: 'mock#index', as: 'mock'
   end
 end
